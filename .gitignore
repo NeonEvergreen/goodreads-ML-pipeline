@@ -1,4 +1,5 @@
 __pycache__/
 goodreads-python-env/
 goodreads-requests.txt
-src/data-scraping/element-xpaths/element-xpath.yaml
+src/data-scraping/element-xpaths/element-xpath-queue.yaml
+env/
