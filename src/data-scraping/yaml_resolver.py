@@ -15,4 +15,5 @@ def yaml_resolver():
 with open(yaml_resolver()) as elements_xpath:
     XPATH_DATA = yaml.safe_load(elements_xpath)
 
-print(XPATH_DATA)
+if __name__ == "__main__":
+    print(XPATH_DATA)

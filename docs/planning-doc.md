@@ -9,14 +9,20 @@
 https://github.com/scrapy-plugins/scrapy-playwright
 
 ### Schema for extraction (confirmed)
-1) All data schema and extraction specifications to be stored within element-xpath-queue.yaml file.
-2) Data variable name and type will also be qualified here.
-3) Robust tests need to be added to confirm this schema is maintained. (data type, data size, validation logic pass, various case handlings, random tests, Summary logging)
+~~1) All data schema and extraction specifications to be stored within element-xpath-queue.yaml file.~~
+~~2) Data variable name and type will also be qualified here.~~
+
+
+NOTE : Create scrapy.Item and scrapy.Field() to FORMAT, STRUCTURE and GENERIC CLEAN data
 
 ### Schema for formatting (in planning stage) (ETL)
-1) Another schema required for Formatting data to correct format. Need to plan on this. (planning)
-2) Possible module with respective lambda functions tied to variable names (planning)
-3) functions for parsing, cleaning. (planning)
+~~1) Another schema required for Formatting data to correct format. Need to plan on this. (planning)~~
+~~2) Possible module with respective lambda functions tied to variable names (planning)~~
+~~3) functions for parsing, cleaning. (planning)~~
+
+
+### TESTS For above
+1) Robust tests need to be added to confirm this schema is maintained. (data type, data size, validation logic pass, various case handlings, random tests, Summary logging)
 
 ### Fast api service wrapping
 1) Wrap Extraction process as a fastapi service
