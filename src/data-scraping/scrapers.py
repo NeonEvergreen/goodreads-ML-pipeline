@@ -64,7 +64,7 @@ class BooksSpider(scrapy.Spider):
                     data_types=data_dict["data_type"],
                     loader=loader)
                 
-                
+                 
             ## Yielding load
             yield data_loader.load_item() # Requires a itemadapter class expansion
 

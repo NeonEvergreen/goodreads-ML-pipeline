@@ -12,18 +12,18 @@ def numeric_formatting(numeric_string : str) -> float:  # removing special chara
     try:
         return float(numeric_string.translate(
             str.maketrans("","",string.punctuation.replace(".","")) # avoid removing decimal point
-            )) 
+            )) # str.maketrans(<replace this>, <with this>, <delete these>)
     except ValueError as e:
         raise ValueError(f"{__name__} :: Numeric Formatting failed :: {numeric_string} :: {e}")
     
 
 def generate_data_page_schema()-> scrapy.Item: # We generate and return a custom scrapy Item based on yaml schema
-    class DataPageSchema(scrapy.Item):
+    class DataPageSchema(scrapy.Item): #initialising a custom ITEM class
         pass
 
-    DataPageSchema.fields["index"] = scrapy.Field()
+    DataPageSchema.fields["index"] = scrapy.Field() # Adding the Goodreads index field 
 
-    for data_key, data_dict in XPATH_DATA["data_pages"].items(): 
+    for data_key_, data_dict in XPATH_DATA["data_pages"].items():  #Adding fields dynamically
         for data_label in data_dict["data_labels"]:
             DataPageSchema.fields[data_label] = scrapy.Field()    
     return DataPageSchema
