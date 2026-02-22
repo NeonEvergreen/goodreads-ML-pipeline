@@ -1,0 +1,234 @@
+## JS paths
+exclude:                                                             ## SKIP the page if these components are present
+  error_page : "//div[@class='ErrorPage__title']" 
+
+###### ###### ###### ###### ###### ###### BOOK PAGE DATA ###### ###### ###### ###### ###### ######
+## Please note this is a one time schema. Once modified, cannot work on existing DB schema.
+
+data_pages:
+# book
+  series_title_and_book_number :
+      data_source : true                                             # enable/disable for tracking
+      data_count : 2                                                 # count of data per element scrape
+      data_type : ["str","str"]                                     # variable data type for each data count
+      data_labels : ["series_name","series_number"]                 # variable names for each data count
+      regex : ^.*$                                                   # regex for scraping
+      xpath : "//div[@class='BookPageTitleSection']//h3//a/text()"   # xpath of element
+  book_title : 
+      data_source : true 
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["book_title"]
+      regex : ^.*$
+      xpath : "//div[@class='BookPageTitleSection']//h1[@data-testid='bookTitle']/text()"
+## Author
+  author_contributor :  
+      data_source : true 
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["author_name"]
+      regex : ^.*$
+      xpath : "//div[@class='FeaturedPerson__profile']//span[@class='ContributorLink__name']/text()"
+  author_link : 
+      data_source : true  
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["author_url"]
+      regex : ^.*$
+      xpath : "//div[@class='FeaturedPerson__profile']//span[@class='ContributorLink__name']/parent::a/@href"  ## (list) 2 elements, just take 1
+## Suggested Author
+  suggested_author :
+      data_source : true  
+      data_count : 1 
+      data_type : ["str"]
+      data_labels : ["suggested_author"]
+      regex : ^.*$
+      xpath : "//div[@class='PageSection']//span[contains(text(),'See also')]/a/text()"
+  suggested_author_link : 
+      data_source : true  
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["suggested_author_link"]
+      regex : ^.*$
+      xpath : "//div[@class='PageSection']//span[contains(text(),'See also')]/a/@href"
+## Rating data
+  overall_rating : 
+      data_source : true  
+      data_count : 1
+      data_type : ["float"]
+      data_labels : ["overall_rating"]
+      regex : ^.*$
+      xpath : "//div[@class='ReviewsSectionStatistics']//div[@class='RatingStatistics__rating']/text()" ## (list) 2 elements, chose 1
+  ratings_count :
+      data_source : true   
+      data_count : 1
+      data_type : ["int"]
+      data_labels : ["ratings_count"]
+      regex : ^[\d,]+$
+      xpath : "//div[@class='ReviewsSectionStatistics']//span[@data-testid='ratingsCount']/text()"
+  rating_1_count :
+      data_source : true   
+      data_count : 1
+      data_type : ["int","str"]
+      data_labels : ["rating_1_count", "rating_1_percent"]
+      regex : ^([\d,]*)\s\(([<>\d]*)%\)$
+      xpath : "//div[@class='ReviewsSectionStatistics']//div[@class='RatingsHistogram__labelTotal' and @data-testid='labelTotal-1']/text()"
+  rating_2_count :
+      data_source : true   
+      data_count : 1
+      data_type : ["int","str"]
+      data_labels : ["rating_2_count","rating_2_percent"]
+      regex : ^([\d,]*)\s\(([<>\d]*)%\)$
+      xpath : "//div[@class='ReviewsSectionStatistics']//div[@class='RatingsHistogram__labelTotal' and @data-testid='labelTotal-2']/text()"
+  rating_3_count :
+      data_source : true   
+      data_count : 1
+      data_type : ["int","str"]
+      data_labels : ["rating_3_count","rating_3_percent"]
+      regex : ^([\d,]*)\s\(([<>\d]*)%\)$
+      xpath : "//div[@class='ReviewsSectionStatistics']//div[@class='RatingsHistogram__labelTotal' and @data-testid='labelTotal-3']/text()"
+  rating_4_count :
+      data_source : true   
+      data_count : 1
+      data_type : ["int","str"]
+      data_labels : ["rating_4_count", "rating_4_percent"]
+      regex : ^([\d,]*)\s\(([<>\d]*)%\)$
+      xpath : "//div[@class='ReviewsSectionStatistics']//div[@class='RatingsHistogram__labelTotal' and @data-testid='labelTotal-4']/text()"
+  rating_5_count :
+      data_source : true   
+      data_count : 1
+      data_type : ["int","str"]
+      data_labels : ["rating_5_count", "rating_5_percent"]
+      regex : ^([\d,]*)\s\(([<>\d]*)%\)$
+      xpath : "//div[@class='ReviewsSectionStatistics']//div[@class='RatingsHistogram__labelTotal' and @data-testid='labelTotal-5']/text()"
+  reviews_count : 
+      data_source : true  
+      data_count : 1
+      data_type : ["int"]
+      data_labels : ["reviews_count"]
+      regex : ^[\d,]+$
+      xpath : "//div[@class='ReviewsSectionStatistics']//span[@data-testid='reviewsCount']/text()"
+## Genre details
+  tags : 
+      data_source : true  
+      data_count : 1
+      data_type : ["list"]
+      data_labels : ["tags"]
+      regex : ^.*$
+      xpath : "//div[@data-testid='genresList']/ul//span[@class='BookPageMetadataSection__genreButton']//span/text()" ##(list)
+## Book details
+  page_count_and_book_type : 
+      data_source : true  
+      data_count : 2
+      data_type : ["int","str"]
+      data_labels : ["page_counts","book_type"]
+      regex : ^(?:(\d*)\s*(?:\w+),)?\s*([a-zA-Z ]+)$
+      xpath : "//p[@data-testid='pagesFormat']/text()"
+  publish_date : 
+      data_source : true  
+      data_count : 1
+      data_type : ["datetime"]
+      data_labels : ["publish_date"]
+      regex : \b[A-Za-z]+\s\d{1,2},\s\d{4}\b
+      xpath : "//p[@data-testid='publicationInfo']/text()"
+  language : 
+      data_source : true   # NOT SHOWING DATA FOR INDEX 9 check why
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["language"]
+      regex : ^.*$
+      xpath : "//div[@class='BookDetails__list']//dt[contains(text(),'Language')]/parent::div//div[@data-testid='contentContainer']/text()"
+  ASIN : 
+      data_source : true 
+      data_count : 1 
+      data_type : ["str"]
+      data_labels : ["ASIN"]
+      regex : ^.*$
+      xpath : "//div[@class='BookDetails__list']//dt[contains(text(),'ASIN')]/parent::div//div[@data-testid='contentContainer']/text()"
+  publisher : 
+      data_source : true 
+      data_count : 1 
+      data_type : ["str"]
+      data_labels : ["publisher"]
+      regex : ^.*$
+      xpath : "//div[@class='BookDetails__list']//dt[contains(text(),'Published')]/parent::div//div[@data-testid='contentContainer']" ###September 16, 2006 by Scholastic Inc
+
+#### DATA BELOW INCOMPLETE
+## Work details
+  awards : 
+      data_source : true 
+      data_count : 1 
+      data_type : ["list"]
+      data_labels : ["awards"]
+      regex : ^.*$
+      xpath : "//div[@class='WorkDetails']//span[@data-testid='award']"   ## (list) ex : Locus Award Nominee for Best Young Adult Novel (2006)
+  series : 
+      data_source : true  
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["title","series"]
+      regex : ^.*$
+      xpath : "//div[@class='WorkDetails']//dt[contains(text(),'Series')]/parent::div//a"
+  character_names :
+      data_source : true  
+      data_count : 1 
+      data_type : ["list"]
+      data_labels : ["title", "series"]
+      regex : ^.*$
+      xpath : "//div[@class='WorkDetails']//dt[contains(text(),'Characters')]/parent::div//a" ## (list)
+
+###### ###### ###### ###### ###### ###### AUTHOR PAGE DATA ###### ###### ###### ###### ###### ######
+
+author_page :
+## Author Metrics
+  Author_followers : 
+      data_source : true  
+      data_count : 1
+      data_type : ["str"]
+      data_labels : ["followers"]
+      regex : ""
+      xpath : "//h2[@class='brownBackground' and contains(text(),'Follower')]" ## J.K. Rowling’s Followers (228,952)
+  rating_count : 
+      data_source : true 
+      data_count : 1 
+      data_type : ["str"]
+      data_labels : ["ratings_counts"]
+      regex : ""
+      xpath : "//div[@class='hreview-aggregate']//span[@itemprop='ratingCount']"
+  review_count : 
+      data_source : true 
+      data_count : 1 
+      data_type : ["str"]
+      data_labels : ["reviews_counts"]
+      regex : ""
+      xpath : "//div[@class='hreview-aggregate']//span[@itemprop='reviewCount']"
+  works_count : 
+      data_source : true 
+      data_count : 1 
+      data_type : ["str"]
+      data_labels : ["work_counts"]
+      regex : ""
+      xpath : "//div[@class='hreview-aggregate']//a[contains(text(),'work')]"
+## Author Personal info
+  birth_date : 
+      data_source : true  
+      data_count : 1
+      data_type : ["datetime"]
+      data_labels : ["birth_date"]
+      regex : ""
+      xpath : "//div[@class='dataItem' and @itemprop='birthDate']" ##July 31, 1965
+  influensive_author : 
+      data_source : true
+      data_count : 1  
+      data_type : ["list"]
+      data_labels : ["influensive_author"]
+      regex : ""
+      xpath : "//div[@class='dataTitle']/following-sibling::div[@class='dataItem']//a[contains(@href, '/author/')]" ## (list) (doubled) Doubled list, take up and until half index
+
+
+      ## Test check
+      # Check yaml file validity
+      # Check yaml file schema
+      # All data_labels are unique
+      # All data_labels adhere to schema
+      # regexes return empty value for not present groups

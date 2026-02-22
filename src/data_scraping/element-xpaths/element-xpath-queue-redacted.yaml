@@ -1,0 +1,45 @@
+## JS paths
+meta:
+  popup_close : "<REDACTED>" ## (for click)
+
+###### ###### ###### ###### ###### BOOK PAGE DATA ###### ###### ###### ###### ######
+
+data_pages:
+# book
+  series_title_and_book_number : "<REDACTED>"
+  book_title : "<REDACTED>"
+## Author
+  author_contributor : "<REDACTED>" ## (list) 2 elements, just take 1 
+  author_link : "<REDACTED>"  ## (list) 2 elements, just take 1
+## Suggested Author
+  suggested_author : "<REDACTED>"
+  suggested_author_link : "<REDACTED>"
+## Rating data
+  rating : "<REDACTED>" ## (list) 2 elements, chose 1
+  ratings_count : "<REDACTED>"
+  reviews_count : "<REDACTED>"
+## Genre details
+  tags_more : "<REDACTED>" ## (for click)
+  tags : "<REDACTED>" ##(list)
+## Book details
+  page_count_and_book_type : "<REDACTED>"
+  publish_date : "<REDACTED>"
+  book_details_button : "<REDACTED>" #(for click)
+  language : "<REDACTED>"
+  ASIN : "<REDACTED>"
+  publisher : "<REDACTED>" ###September 16, 2006 by Scholastic Inc
+## Work details
+  awards : "<REDACTED>"   ## (list) ex : Locus Award Nominee for Best Young Adult Novel (2006)
+  series : "<REDACTED>"
+  character_names : "<REDACTED>" ## (list)
+
+author_page :
+## Author Metrics
+  Author_followers : "<REDACTED>" ## J.K. Rowling’s Followers (228,952)
+  rating_count : "<REDACTED>"
+  review_count : "<REDACTED>"
+  works_count : "<REDACTED>"
+## Author Personal info
+  birth_date : "<REDACTED>" ##July 31, 1965
+  more_influensive_author : "<REDACTED>" ## (click)
+  influensive_author : "<REDACTED>" ## (list) (doubled) Doubled list, take up and until half index
